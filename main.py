@@ -1,22 +1,7 @@
 import numpy as np
 
 from matplotlib import pyplot as plt
-
-def divergence(u, v):
-    grad_u = np.gradient(u)
-    grad_v = np.gradient(v)
-
-    div =  grad_u[0] + grad_v[1]
-
-    return div
-
-def curl(u, v):
-    grad_u = np.gradient(u)
-    grad_v = np.gradient(v)
-
-    curl = grad_v[0] - grad_u[1]
-
-    return curl
+from utils import *
 
 P = np.loadtxt('tryckfalt.dat')
 u = np.loadtxt('vindfalt_u.dat')
@@ -35,7 +20,8 @@ c = ax[0,0].contourf(x, y, P, 11)
 plt.colorbar(c, ax=ax[0,0])
 ax[0,0].set_title("Nivåkurvor, lufttryck (hPa)")
 
-ax[0,1].streamplot(x, y, u, v, linewidth=0.7, density=2)
+ax[0,1].streamplot(x, y, u, v, linewidth=1, density=1)
+ax[0,1].quiver(x, y, u, v)
 ax[0,1].set_title("Fältlinjer, vindhastighet")
 
 c = ax[1,0].contourf(x,y,div)
